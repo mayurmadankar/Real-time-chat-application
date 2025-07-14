@@ -2,12 +2,12 @@ import React from "react";
 import assets, { userDummyData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({ selectUser, setSelectedUser }) => {
+const Sidebar = ({ selectedUser, setSelectedUser }) => {
   const navigate = useNavigate();
   return (
     <div
       className={`bg-[#8185B2]/10 h-full p-5 rounded-r-xl overflow-y-scroll text-white ${
-        selectUser ? "max-md:hidden" : ""
+        selectedUser ? "max-md:hidden" : ""
       }`}
     >
       <div className="pb-5">
@@ -50,7 +50,7 @@ const Sidebar = ({ selectUser, setSelectedUser }) => {
               setSelectedUser(user);
             }}
             className={`relative flex items-center gap-2 p-2 pl-4 rounded cursor-pointer max-sm:text-xs ${
-              selectUser?._id === user._id && "bg-[#282142]/50"
+              selectedUser?._id === user._id && "bg-[#282142]/50"
             }`}
           >
             <img
