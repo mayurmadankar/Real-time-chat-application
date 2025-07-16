@@ -3,19 +3,23 @@ dotenv.config();
 import express from "express";
 import { connectDB } from "./src/config/db.js";
 import bodyParser from "body-parser";
+import http from "http";
+import cors from "cors";
 
-const server = express();
+const app = express();
+const server = http.createServer(app);
 const port = process.env.PORT_NUMBER;
 
-server.use(express.json());
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ limit: "4mb" }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-server.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Welcome to the Real Time chat Application");
 });
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on PORT :- ${port}`);
   connectDB();
 });
